@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import "./style.css";
 import MenuIcon from "./components/MenuIcon.vue";
 import { ref } from "vue";
 let drawer = ref(false);
@@ -21,19 +22,50 @@ let drawer = ref(false);
 				<v-list-item title="About" to="/about"></v-list-item>
 			</v-list>
 		</v-navigation-drawer>
-		<div class="app">
-			<a href="https://vitejs.dev" target="_blank">
-				<img src="/vite.svg" class="logo" alt="Vite logo" />
-			</a>
-			<a href="https://vuejs.org/" target="_blank">
-				<img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-			</a>
+		<div class="flex justify-center">
+			<div class="app">
+				<a href="https://vitejs.dev" target="_blank">
+					<img src="/vite.svg" class="logo" alt="Vite logo" />
+				</a>
+				<a href="https://vuejs.org/" target="_blank">
+					<img
+						src="./assets/vue.svg"
+						class="logo vue"
+						alt="Vue logo"
+					/>
+				</a>
+			</div>
 		</div>
+
 		<br />
 		<router-view />
+		<v-footer>
+			<div id="footer" class="bg-teal d-flex w-100 align-center px-4">
+				<div>
+					<h3>Footer</h3>
+				</div>
+				<br />
+				<strong
+					>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					<br />
+					Inventore aperiam nihil consectetur autem totam eum <br />
+					voluptatem modi eveniet eligendi, quibusdam deleniti <br />
+					pariatur nisi quas et ab dolorum repudiandae? Enim, <br />
+					minima.</strong
+				>
+				<v-spacer></v-spacer>
+			</div>
+			<div class="px-4 py-2 bg-black text-center w-100">
+				{{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+			</div>
+		</v-footer>
 	</v-app>
 </template>
 <style scoped>
+@import url("./style.css");
+#footer {
+	width: 100%;
+}
 .app {
 	margin-top: 10vh;
 	width: 100%;

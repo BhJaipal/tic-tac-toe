@@ -6,6 +6,7 @@ import { createVuetify } from "vuetify";
 import "./style.css";
 import router from "./routes";
 import App from "./App.vue";
+import "virtual:windi.css";
 
 const vuetify = createVuetify({
 	components,
