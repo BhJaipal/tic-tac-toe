@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "sass": "^1.72.0",
     "scss": "^0.2.4",
     "vue": "^3.3.11",

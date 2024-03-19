@@ -126,7 +126,8 @@ function restart() {
 }
 
 .game {
-	margin-left: 35%;
+	margin-top: 3rem;
+	margin-left: 46%;
 	height: 150px;
 	width: 150px;
 	background-color: transparent;
