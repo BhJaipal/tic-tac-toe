@@ -89,6 +89,22 @@
 				</v-card>
 			</v-dialog>
 			<v-divider color="grey" thickness="10"></v-divider>
+			<v-row>
+				<v-btn @click="tooltipShow = !tooltipShow"> Button </v-btn>
+				<v-tooltip v-model="tooltipShow" location="top">
+					<template v-slot:activator="{ props }">
+						<v-btn icon v-bind="props">
+							<v-icon color="grey-lighten-1"> mdi-cart </v-icon>
+						</v-btn>
+					</template>
+					<span>Programmatic tooltip</span>
+				</v-tooltip>
+			</v-row>
+			<v-breadcrumbs :items="breadcrumbeRoute">
+				<template v-slot:divider>
+					<v-icon icon="mdi-chevron-right"></v-icon>
+				</template>
+			</v-breadcrumbs>
 		</div>
 		<div class="div">
 			<v-expansion-panels>
@@ -161,12 +177,50 @@
 					<v-list-item-title :v-text="item.text"></v-list-item-title>
 				</v-list-item>
 			</v-list>
+			<v-sheet
+				:elevation="24"
+				:height="100"
+				:width="300"
+				border
+				color="success"
+				rounded="xl"
+			>
+				<p class="mt-2">This is a sheet</p>
+			</v-sheet>
+			<v-toolbar title="Toolbar" :elevation="10" density="compact">
+				<v-toolbar-items>
+					<v-btn variant="outlined" icon="mdi-menu"></v-btn>
+				</v-toolbar-items>
+			</v-toolbar>
 		</div>
 	</div>
+	<v-bottom-navigation v-model="BtmNavValue" color="primary" horizontal>
+		<v-btn>
+			<v-icon>mdi-history</v-icon>
+			Recents
+		</v-btn>
+		<v-btn>
+			<v-icon>mdi-heart</v-icon>
+			Favorites
+		</v-btn>
+		<v-btn>
+			<v-icon>mdi-map-marker</v-icon>
+			Nearby
+		</v-btn>
+	</v-bottom-navigation>
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import router from "../routes";
+let BtmNavValue = ref(1);
+let tooltipShow = ref(false);
 let businessOffer = ref<boolean>(true);
+let route = router.currentRoute.value;
+console.log(route);
+
+let breadcrumbeRoute = route.path.split("/").map((it) => {
+	return { title: it, disabled: false, href: "/" + it };
+});
 let items = [
 	{ text: "Real-Time", icon: "mdi-clock" },
 	{ text: "Audience", icon: "mdi-account" },
