@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "@volar/language-service": "^2.1.6",
     "sass": "^1.72.0",
     "scss": "^0.2.4",
+    "volar-service-vetur": "^0.0.34",
     "vue": "^3.3.11",
     "vue-router": "^4.3.0",
     "vuetify": "^3.5.9"
