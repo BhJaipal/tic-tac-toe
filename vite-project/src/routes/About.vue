@@ -71,6 +71,36 @@
 						<v-pagination :length="5" rounded="xl"></v-pagination>
 					</v-col>
 				</v-container>
+				<v-col cols="12">
+					<v-combobox
+						v-model="selected"
+						:items="comboboxItems"
+						label="I use a scoped slot"
+						multiple
+					>
+						<template v-slot:selection="data">
+							<v-chip
+								:key="JSON.stringify(data.item)"
+								v-bind="data.attrs"
+								:disabled="data.disabled"
+								:model-value="data.selected"
+								size="small"
+								@click:close="data.parent.selectItem(data.item)"
+							>
+								<template v-slot:prepend>
+									<v-avatar
+										class="bg-accent text-uppercase"
+										start
+										>{{
+											data.item.title.slice(0, 1)
+										}}</v-avatar
+									>
+								</template>
+								{{ data.item.title }}
+							</v-chip>
+						</template>
+					</v-combobox>
+				</v-col>
 			</v-window-item>
 			<v-window-item :value="2">
 				<v-container fluid>
@@ -243,8 +273,43 @@
 										icon="mdi-menu"
 									></v-btn>
 								</v-toolbar-items>
-							</v-toolbar></div
-					></v-col>
+							</v-toolbar>
+						</div>
+						<v-file-input
+							:rules="[
+								(value) => {
+									return (
+										!value ||
+										!value.length ||
+										value[0].size < 2000000 ||
+										'Avatar size should be less than 2 MB!'
+									);
+								},
+							]"
+							:show-size="1024"
+							:counter="true"
+							accept="image/png, image/jpeg, image/bmp"
+							label="Avatar"
+							placeholder="Pick an avatar"
+							prepend-icon="mdi-camera"
+						>
+							<template v-slot:selection="{ fileNames }">
+								<template
+									v-for="fileName in fileNames"
+									:key="fileName"
+								>
+									<v-chip
+										class="me-2"
+										color="primary"
+										size="small"
+										label
+									>
+										{{ fileName }}
+									</v-chip>
+								</template></template
+							>
+						</v-file-input>
+					</v-col>
 				</v-container>
 			</v-window-item>
 		</v-window>
@@ -272,6 +337,8 @@ let tooltipShow = ref(false);
 let businessOffer = ref<boolean>(true);
 let route = router.currentRoute.value;
 
+let comboboxItems = ["Programming", "Design", "Vue", "Vuetify"];
+let selected = ref([comboboxItems[0], comboboxItems[2]]);
 let tabs = ref(null);
 let breadcrumbeRoute = route.path.split("/").map((it) => {
 	return { title: it, disabled: "/" + it == route.path, href: "/" + it };

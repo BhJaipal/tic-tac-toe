@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import "./style.css";
 import MenuIcon from "./components/MenuIcon.vue";
-import SysBar from "./components/SystemBar.vue";
 import { ref } from "vue";
 let drawer = ref(false);
 let links = ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"];
@@ -24,7 +23,7 @@ let links = ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"];
 			</v-list>
 		</v-navigation-drawer>
 		<v-main>
-			<SysBar />
+			<system-bar />
 			<div class="flex justify-center">
 				<div class="app">
 					<a href="https://vitejs.dev" target="_blank">
