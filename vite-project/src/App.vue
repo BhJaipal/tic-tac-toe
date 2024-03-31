@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "./style.css";
 import MenuIcon from "./components/MenuIcon.vue";
+import SystemBar from "./components/SystemBar.vue";
 import { ref } from "vue";
 let drawer = ref(false);
 let links = ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"];
@@ -23,7 +24,7 @@ let links = ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"];
 			</v-list>
 		</v-navigation-drawer>
 		<v-main>
-			<system-bar />
+			<SystemBar />
 			<div class="flex justify-center">
 				<div class="app">
 					<a href="https://vitejs.dev" target="_blank">
@@ -54,7 +55,7 @@ let links = ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"];
 				>
 					{{ link }}
 				</v-btn>
-				<v-col class="text-center mt-10" cols="12">
+				<v-col class="mt-10 text-center" cols="12">
 					{{ new Date().getFullYear() }} —
 					<strong>Vuetify</strong>
 				</v-col>

@@ -10,8 +10,12 @@
 		</v-system-bar>
 	</v-layout>
 </template>
-<script lang="ts" setup>
-import { ref } from "vue";
-
-let fullTime = ref(new Date(Date.now()));
+<script lang="ts">
+export default {
+	name: "SystemBar",
+	data() {
+		let fullTime = new Date(Date.now());
+		return { fullTime };
+	},
+};
 </script>
