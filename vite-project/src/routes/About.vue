@@ -366,7 +366,10 @@
 									v-model="formData.select"
 									:rules="[(v) => !!v || 'Item is required']"
 								></v-select>
-								<v-radio-group v-model="formData.gender">
+								<v-radio-group
+									v-model="formData.gender"
+									required
+								>
 									<v-row class="px-10">
 										<v-radio
 											label="Male"
@@ -412,7 +415,12 @@
 								</v-checkbox>
 							</v-card>
 						</v-row>
-						<v-btn type="submit" class="mt-10 mb-4">Submit</v-btn>
+						<v-btn
+							type="submit"
+							class="mt-10 mb-4"
+							:disabled="!isDataValid"
+							>Submit</v-btn
+						>
 					</v-form>
 					<v-divider color="grey" thickness="10"></v-divider>
 					<template v-if="formData.submition">
@@ -448,7 +456,7 @@
 												: 'mdi-close'
 										"
 										:color="
-											formData.out === 'correct otp'
+											formData.out === 'Correct otp'
 												? 'success'
 												: 'error'
 										"
@@ -484,7 +492,7 @@
 	</v-bottom-navigation>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import router from "../routes";
 let BtmNavValue = ref(1);
 let tooltipShow = ref(false);
@@ -512,6 +520,13 @@ let formData = ref({
 	otpDialog: false,
 	jsonOut: "",
 });
+let isDataValid = computed(
+	() =>
+		!!formData.value.name &&
+		!!formData.value.email &&
+		formData.value.checkbox &&
+		formData.value.select != null
+);
 
 function validateOtp() {
 	formData.value.otpDialog = true;
