@@ -144,7 +144,7 @@ function restart() {
 	<div class="game">
 		<template v-for="(outer, i) in boxes" :key="i">
 			<div class="row">
-				<template v-for="(_, j) in outer" :key="j">
+				<template v-for="(_, j) in outer" :key="i + 1 + '.' + (j + 1)">
 					<Box
 						@click="
 							() => {

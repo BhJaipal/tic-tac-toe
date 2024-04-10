@@ -9,12 +9,28 @@
 	</v-layout>
 </template>
 <script lang="ts">
-import { computed } from "vue";
+import { ref, watch } from "vue";
 export default {
 	name: "SystemBar",
 	data() {
-		let fullTime = computed(() => new Date(Date.now()));
-		const formattedTime = computed(() => {
+		const fullTime = ref(new Date(Date.now()));
+		setInterval(() => {
+			fullTime.value = new Date(Date.now());
+		}, 1000);
+		const minChange = ref(fullTime.value.getMinutes());
+		watch(minChange, () => {
+			fullTime.value = new Date(Date.now());
+		});
+		const formattedTime = ref("");
+		const cycle = fullTime.value.getHours() > 12 ? "PM" : "AM";
+		const hours = String(
+			fullTime.value.getHours() > 12
+				? fullTime.value.getHours() - 12
+				: fullTime.value.getHours()
+		).padStart(2, "0");
+		const minutes = String(fullTime.value.getMinutes()).padStart(2, "0");
+		formattedTime.value = `${hours}:${minutes} ${cycle}`;
+		watch(fullTime, () => {
 			const cycle = fullTime.value.getHours() > 12 ? "PM" : "AM";
 			const hours = String(
 				fullTime.value.getHours() > 12
@@ -25,9 +41,9 @@ export default {
 				2,
 				"0"
 			);
-			return `${hours}:${minutes} ${cycle}`;
+			formattedTime.value = `${hours}:${minutes} ${cycle}`;
 		});
-		return { formattedTime };
+		return { formattedTime, fullTime };
 	},
 };
 </script>

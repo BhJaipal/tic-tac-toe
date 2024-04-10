@@ -11,6 +11,7 @@
 				<v-tab :value="2">Accordions</v-tab>
 				<v-tab :value="3">Small size</v-tab>
 				<v-tab :value="4">Forms</v-tab>
+				<v-tab :value="5">Show case</v-tab>
 			</v-tabs>
 			<v-window v-model="tabs">
 				<v-window-item :value="1">
@@ -88,6 +89,65 @@
 								:length="5"
 								rounded="xl"
 							></v-pagination>
+							<v-sheet
+								class="mx-auto"
+								elevation="8"
+								max-width="800"
+							>
+								<v-slide-group
+									v-model="itemGroup.slideModel"
+									class="pa-4"
+									selected-class="bg-primary"
+									show-arrows
+								>
+									<v-slide-group-item
+										v-for="n in 15"
+										:key="n"
+										v-slot="{
+											isSelected,
+											toggle,
+											selectedClass,
+										}"
+									>
+										<v-card
+											:class="['ma-4', selectedClass]"
+											color="grey-lighten-1"
+											height="200"
+											width="100"
+											@click="toggle"
+										>
+											<div
+												class="justify-center d-flex fill-height align-center"
+											>
+												<v-scale-transition>
+													<v-icon
+														v-if="isSelected"
+														color="white"
+														icon="mdi-close-circle-outline"
+														size="48"
+													></v-icon>
+												</v-scale-transition>
+											</div>
+										</v-card>
+									</v-slide-group-item>
+								</v-slide-group>
+
+								<v-expand-transition>
+									<v-sheet
+										v-if="itemGroup.slideModel != null"
+										height="200"
+									>
+										<div
+											class="justify-center d-flex fill-height align-center"
+										>
+											<h3 class="text-h6">
+												Selected
+												{{ itemGroup.slideModel }}
+											</h3>
+										</div>
+									</v-sheet>
+								</v-expand-transition>
+							</v-sheet>
 						</v-col>
 					</v-container>
 					<v-col cols="12">
@@ -473,6 +533,119 @@
 						</v-dialog>
 					</template>
 				</v-window-item>
+				<v-window-item :value="5">
+					<div class="py-4 d-flex justify-space-around align-center">
+						<v-btn
+							icon="mdi-minus"
+							variant="text"
+							@click="
+								showcase.model =
+									showcase.model == 0
+										? 4
+										: Math.max(showcase.model - 1, 0)
+							"
+						></v-btn>
+						{{ showcase.model + 1 }}
+						<v-btn
+							icon="mdi-plus"
+							variant="text"
+							@click="
+								showcase.model =
+									showcase.model == 4
+										? 0
+										: Math.min(showcase.model + 1, 4)
+							"
+						></v-btn>
+					</div>
+					<v-carousel
+						v-model="showcase.model"
+						height="400"
+						show-arrows="hover"
+						cycle
+						progress="primary"
+						hide-delimiters
+						hide-delimiter-background
+					>
+						<v-carousel-item
+							v-for="(slide, i) in showcase.slides"
+							:key="i"
+						>
+							<v-sheet :color="showcase.colors[i]" height="100%">
+								<div
+									class="justify-center d-flex fill-height align-center"
+								>
+									<div class="text-h2">{{ slide }} Slide</div>
+								</div>
+							</v-sheet>
+						</v-carousel-item>
+					</v-carousel>
+					<v-card class="mx-auto my-5" max-width="400">
+						<v-container class="pa-1">
+							<v-item-group
+								v-model="itemGroup.selection"
+								multiple
+							>
+								<v-row>
+									<v-col
+										v-for="(item, i) in itemGroup.items"
+										:key="i"
+										cols="12"
+										md="6"
+									>
+										<v-item v-slot="{ isSelected, toggle }">
+											<v-img
+												:src="`https://cdn.vuetifyjs.com/images/${item.src}`"
+												class="text-right pa-2"
+												height="200"
+												cover
+												@click="toggle"
+											>
+												<v-btn
+													:icon="
+														isSelected
+															? 'mdi-heart'
+															: 'mdi-heart-outline'
+													"
+												></v-btn>
+											</v-img>
+										</v-item>
+									</v-col>
+								</v-row>
+							</v-item-group>
+						</v-container>
+					</v-card>
+					<v-row>
+						<v-card width="750" class="mx-auto my-10">
+							<v-stepper
+								alt-labels
+								editable
+								:items="['Step 1', 'Step 2', 'Step 3']"
+							>
+								<template v-slot:item.1>
+									<v-card title="Step One" flat
+										>Lorem ipsum dolor sit amet, consectetur
+										adipisicing elit.</v-card
+									>
+								</template>
+
+								<template v-slot:item.2>
+									<v-card title="Step Two" flat>
+										Praesentium eum consequuntur eos,
+									</v-card>
+								</template>
+
+								<template v-slot:item.3>
+									<v-card title="Step Three" flat
+										>laudantium ipsa nihil esse commodi nam
+										pariatur incidunt aspernatur corporis
+										quaerat quo in nobis odit iure, fuga
+										dignissimos!</v-card
+									>
+								</template>
+							</v-stepper>
+						</v-card>
+					</v-row>
+				</v-window-item>
 			</v-window>
 		</v-card>
 	</v-row>
@@ -492,7 +665,36 @@
 	</v-bottom-navigation>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
+let itemGroup = reactive({
+	items: [
+		{
+			src: "backgrounds/bg.jpg",
+		},
+		{
+			src: "backgrounds/md.jpg",
+		},
+		{
+			src: "backgrounds/bg-2.jpg",
+		},
+		{
+			src: "backgrounds/md2.jpg",
+		},
+	],
+	selection: [],
+	slideModel: null,
+});
+let showcase = reactive({
+	colors: [
+		"indigo",
+		"warning",
+		"pink darken-2",
+		"red lighten-1",
+		"deep-purple accent-4",
+	],
+	slides: ["First", "Second", "Third", "Fourth", "Fifth"],
+	model: 0,
+});
+import { computed, reactive, ref } from "vue";
 import router from "../routes";
 let BtmNavValue = ref(1);
 let tooltipShow = ref(false);
