@@ -21,6 +21,7 @@ let links = ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"];
 			<v-list>
 				<v-list-item title="Home" to="/"></v-list-item>
 				<v-list-item title="About" to="/about"></v-list-item>
+				<v-list-item title="Settings" to="/settings"></v-list-item>
 			</v-list>
 		</v-navigation-drawer>
 		<v-main>

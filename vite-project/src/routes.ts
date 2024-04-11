@@ -12,6 +12,11 @@ const router = createRouter({
 			path: "/about",
 			component: () => import("./routes/About.vue"),
 		},
+		{
+			name: "Settings",
+			path: "/settings",
+			component: () => import("./routes/Settings.vue"),
+		},
 	],
 	history: createWebHistory(),
 });

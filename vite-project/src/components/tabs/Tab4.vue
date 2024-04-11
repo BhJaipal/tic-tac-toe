@@ -64,7 +64,9 @@
 							<template v-slot:label>
 								<v-tooltip>
 									<template v-slot:activator="{ props }">
-										<v-btn v-bind="props"
+										<v-btn
+											v-bind="props"
+											color="transparent"
 											>Terms and conditions</v-btn
 										>
 									</template>
@@ -192,12 +194,9 @@ function submitForm(e: any) {
 	formData.value.correctOtp = otp;
 	window.Notification.requestPermission(() => {
 		if (Notification.permission == "granted") {
-			let notification = new Notification("OTP", {
+			new Notification("OTP", {
 				body: `Your OTP is ${otp}`,
 			});
-			setTimeout(() => {
-				notification.close();
-			}, 10000);
 		}
 	});
 }
