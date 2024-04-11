@@ -2,6 +2,14 @@
 	<v-container :fluid="true">
 		<v-col>
 			<v-btn variant="tonal"> Button </v-btn>
+			<v-switch
+				v-model="Switch"
+				:label="Switch ? 'On' : 'Off'"
+				color="blue-darken-4"
+				density="compact"
+				inline
+				inset
+			></v-switch>
 			<v-row class="mt-10" no-gutters>
 				<v-col cols="12" sm="3">
 					<v-chip
@@ -135,6 +143,7 @@ import { ref } from "vue";
 let { route } = defineProps<{ route: string }>();
 let tooltipShow = ref(false);
 let chip = ref(true);
+let Switch = ref(true);
 
 let breadcrumbeRoute = route.split("/").map((it) => {
 	return { title: it, disabled: "/" + it == route, href: "/" + it };

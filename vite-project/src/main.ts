@@ -6,7 +6,6 @@ import { createVuetify } from "vuetify";
 import "./style.css";
 import router from "./routes";
 import App from "./App.vue";
-// import "virtual:windi.css";
 import "@mdi/font/css/materialdesignicons.css";
 
 const vuetify = createVuetify({
