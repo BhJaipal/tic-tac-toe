@@ -245,6 +245,31 @@
 			</v-alert>
 		</v-timeline-item>
 	</v-timeline>
+	<V-row>
+		<v-col cols="12" sm="3"></v-col>
+		<v-col cols="12" sm="3" class="px-20">
+			<div class="px-auto">
+				<v-img
+					:width="344"
+					:aspect-ratio="aspectRatio"
+					cover
+					class="my-10"
+					src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+				></v-img>
+			</div>
+		</v-col>
+		<v-col cols="12" sm="3">
+			<v-section class="px-10 pt-20">
+				<v-radio-group v-model="aspectRatio" class="px-10 pt-20">
+					<v-radio label="16:9" :value="16 / 9"></v-radio>
+					<v-radio label="4:3" :value="4 / 3"></v-radio>
+					<v-radio label="1:1" :value="1 / 1"></v-radio>
+				</v-radio-group>
+			</v-section>
+		</v-col>
+		<v-col cols="12" sm="3"></v-col>
+	</V-row>
+
 	<v-progress-circular
 		color="primary"
 		indeterminate
@@ -255,6 +280,7 @@
 
 <script setup lang="ts">
 import { reactive, ref, watch } from "vue";
+let aspectRatio = ref<number>(4 / 3);
 let loading = ref(false);
 let rating = ref(3);
 let alert = ref(true);

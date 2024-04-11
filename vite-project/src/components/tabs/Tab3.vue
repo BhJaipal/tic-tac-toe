@@ -44,6 +44,36 @@
 					</v-badge>
 				</v-col>
 			</v-row>
+			<v-row class="mt-10" no-gutters>
+				<v-col cols="12" sm="3">
+					<v-icon
+						color="error"
+						icon="mdi-access-point"
+						size="small"
+					></v-icon>
+					Access point
+				</v-col>
+				<v-col cols="12" sm="3">
+					<v-icon
+						color="success"
+						icon="mdi-check-circle"
+						size="x-large"
+					></v-icon>
+					Check circle
+				</v-col>
+				<v-col cols="12" sm="3">
+					<v-icon color="warning" icon="mdi-alert"></v-icon>
+					Alert
+				</v-col>
+				<v-col cols="12" sm="3">
+					<v-icon
+						color="info"
+						icon="mdi-antenna"
+						size="large"
+					></v-icon>
+					Antenna
+				</v-col>
+			</v-row>
 
 			<v-row class="flex justify-center mt-5">
 				<v-btn @click="tooltipShow = !tooltipShow"> Button </v-btn>

@@ -1,33 +1,49 @@
 <template>
 	<v-row align="center" justify="center">
 		<v-card width="1404">
-			<v-tabs
-				v-model="tabs"
-				align-tabs="end"
-				color="deep-purple-accent-4"
-				class="mb-10"
+			<v-parallax
+				src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+				width="auto"
+				height="48"
 			>
-				<v-tab :value="1">cards and tooltips</v-tab>
-				<v-tab :value="2">Accordions</v-tab>
-				<v-tab :value="3">Small size</v-tab>
-				<v-tab :value="4">Forms</v-tab>
-				<v-tab :value="5">Show case</v-tab>
-			</v-tabs>
+				<v-tabs
+					v-model="tabs"
+					align-tabs="end"
+					color="deep-purple-accent-4"
+					class="mb-10"
+				>
+					<v-tab :value="1">cards and tooltips</v-tab>
+					<v-tab :value="2">Accordions</v-tab>
+					<v-tab :value="3">Small size</v-tab>
+					<v-tab :value="4">Forms</v-tab>
+					<v-tab :value="5">Show case</v-tab>
+				</v-tabs>
+			</v-parallax>
 			<v-window v-model="tabs">
 				<v-window-item :value="1">
-					<Tab1 />
+					<section id="cards">
+						<Tab1 />
+					</section>
 				</v-window-item>
 				<v-window-item :value="2">
-					<Tab2 />
+					<section id="accordians">
+						<Tab2 />
+					</section>
 				</v-window-item>
 				<v-window-item :value="3">
-					<Tab3 :route="route.path" />
+					<section id="small">
+						<Tab3 :route="route.path" />
+					</section>
 				</v-window-item>
 				<v-window-item :value="4">
-					<Tab4 />
+					<section id="forms">
+						<Tab4 />
+					</section>
 				</v-window-item>
 				<v-window-item :value="5">
-					<Tab5 />
+					<section id="showcase">
+						<Tab5 />
+					</section>
 				</v-window-item>
 			</v-window>
 		</v-card>
