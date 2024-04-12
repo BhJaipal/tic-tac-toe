@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Box from "./../components/Box.vue";
+import multipleProps from "../components/multiple-props.vue";
 import { ref } from "vue";
 
 /// Box values
@@ -164,4 +165,6 @@ function restart() {
 	<div>
 		<button class="restart" @click="restart">⭮ Reload</button>
 	</div>
+	<multipleProps name="Jaipal" :age="19" class="mt-10" />
+	<multipleProps course="Web Development" subject="JavaScript" />
 </template>
