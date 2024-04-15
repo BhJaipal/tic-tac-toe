@@ -165,6 +165,7 @@ function restart() {
 	<div>
 		<button class="restart" @click="restart">⭮ Reload</button>
 	</div>
-	<multipleProps name="Jaipal" :age="19" class="mt-10" />
+	<multipleProps name="Jaipal" color="primary" :age="19" class="mt-10" />
 	<multipleProps course="Web Development" subject="JavaScript" />
+	<multipleProps name="Jaipal" subject="JavaScript" color="primary" />
 </template>
