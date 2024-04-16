@@ -76,13 +76,11 @@
 								cover
 								@click="toggle"
 							>
-								<v-btn
-									:elevation="0"
-									density="comfortable"
-									:color="isSelected ? 'red' : 'transparent'"
-									icon="mdi-heart"
-								>
-								</v-btn>
+								<v-icon
+									:elevation="isSelected ? 12 : 0"
+									:color="isSelected ? 'red' : 'white'"
+									>mdi-heart
+								</v-icon>
 							</v-img>
 						</v-item>
 					</v-col>
